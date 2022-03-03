@@ -25,13 +25,17 @@ public class User {
     private Long id;
 
     @NotBlank
-    private String name;
+    private String firstName;
 
     @NotBlank
-    private String phoneNumber;
+    private String secondName;
 
     @NotBlank
     private String username;
+
+    @NotBlank
+    private String identificationNumber;
+
 
     @NotBlank
     @JsonIgnore
@@ -47,11 +51,13 @@ public class User {
     @JsonIgnore
     private Set<Role> roles = new HashSet<>();
 
-    public User(String name, String username, String phoneNumber, String password) {
-        this.name = name;
+    public User(String firstName, String secondName, String username, String identificationNumber, String password) {
+        this.firstName = firstName;
+        this.secondName = secondName;
         this.username = username;
-        this.phoneNumber = phoneNumber;
+        this.identificationNumber = identificationNumber;
         this.password = password;
+        this.accountStatus = "1"; // one for active
     }
 
 }

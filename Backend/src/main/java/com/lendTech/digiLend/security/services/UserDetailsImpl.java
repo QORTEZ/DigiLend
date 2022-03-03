@@ -20,22 +20,26 @@ public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+    private String firstName;
+    private String secondName;
     private String username;
-    private String phoneNumber;
-    private String emailVerified;
+    private String accountStatus;
+    private String identificationNumber;
 
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String password, String phoneNumber,
-                           Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(Long id, String firstName, String secondName, String username, String password,
+                           String identificationNumber, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
         this.username = username;
         this.password = password;
-        this.phoneNumber = phoneNumber;
         this.authorities = authorities;
+        this.identificationNumber = identificationNumber;
     }
 
     public static UserDetailsImpl build(User user) {
@@ -46,8 +50,10 @@ public class UserDetailsImpl implements UserDetails {
         return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
+                user.getFirstName(),
+                user.getSecondName(),
                 user.getPassword(),
-                user.getPhoneNumber(),
+                user.getIdentificationNumber(),
                 authorities);
     }
 
