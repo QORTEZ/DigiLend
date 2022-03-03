@@ -34,6 +34,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           ssh username@host
-          tmux attach -t backend
-          trap '' INT   # ignore INT & shut down application
-          echo Deployment complete #shut down application
+          echo ifconfig
+         # tmux attach -t backend
+          #trap '' INT   # ignore INT & shut down application
+          #echo Deployment complete #shut down application
