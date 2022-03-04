@@ -33,6 +33,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
+          ssh git@github.com -vvvv
           ssh -tt ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
           ifconfig
           tmux attach -t backend
