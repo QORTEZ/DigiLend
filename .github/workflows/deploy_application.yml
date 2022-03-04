@@ -33,7 +33,7 @@ jobs:
                cd DigiLend/Backend
                mvn package # build the application
                cd 
-               ./start_application.sh # start the application
+               service digilend start # start the application
                echo "Deployment complete"
                echo "Works well"
 
