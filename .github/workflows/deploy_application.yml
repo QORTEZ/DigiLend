@@ -33,7 +33,7 @@ jobs:
                cd DigiLend/Backend
                mvn package # build the application
                cd target
-               java -jar digiLend-0.0.1-SNAPSHOT.jar # start the application
+               java -jar digiLend-0.0.1-SNAPSHOT.jar & # start the application
                echo "Deployment complete"
 
 
