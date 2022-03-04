@@ -16,8 +16,11 @@ import com.lendTech.digiLend.repositories.UserRepository;
 import com.lendTech.digiLend.security.jwt.JwtUtils;
 import com.lendTech.digiLend.security.services.RefreshTokenService;
 import com.lendTech.digiLend.security.services.UserDetailsImpl;
+import com.lendTech.digiLend.services.UserService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -54,6 +57,9 @@ public class AuthController {
     @Autowired
     RefreshTokenService refreshTokenService;
 
+    @Autowired
+    UserService userService;
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -68,16 +74,21 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
+        userService.saveAuthToken(jwt,userDetails.getId());
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
+
         return ResponseEntity.ok(new JwtResponse(jwt,
                 refreshToken.getToken(),
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getFirstName(),
-                userDetails.getSecondName(),
-                userDetails.getAccountStatus(),
-                userDetails.getIdentificationNumber(),
                 roles));
+    }
+
+
+    @PostMapping("/user/details")
+/*
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CUSTOMER')")
+*/
+    public String getUserDetails(@RequestParam String authToken) {
+        return userService.findUserByAuthToken(authToken).toString();
     }
 
     @PostMapping("/signup")
