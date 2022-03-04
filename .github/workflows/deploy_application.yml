@@ -37,7 +37,6 @@ jobs:
           echo "$SSH_KEY" > ../private.key
           sudo chmod 600 ../private.key
           echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          shell: bash
           ssh -tt ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
           ifconfig
           tmux attach -t backend
