@@ -30,6 +30,8 @@ jobs:
           username: ${{secrets.SSH_USERNAME}} # user of server
           script: |
                ifconfig
+               tmux attach -t backend
+               trap '' INT   # ignore INT & shut down application
 
 
       # Runs a set of commands using the runners shell
