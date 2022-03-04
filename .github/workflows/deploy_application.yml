@@ -35,5 +35,6 @@ jobs:
                cd 
                ./start_application.sh # start the application
                echo "Deployment complete"
+               echo "Works well"
 
 
