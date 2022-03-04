@@ -1,5 +1,6 @@
 package com.lendTech.digiLend.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Loan {
 
     @Id
@@ -19,9 +21,11 @@ public class Loan {
 
     private Long amount;
 
+    private Long userId;
 
-    private String dateTime;
+    private String disbursementDate;
 
-    private String dateTimeCreated;
+    private String repaymentDate;
+
 
 }
