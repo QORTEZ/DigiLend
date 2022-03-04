@@ -32,7 +32,7 @@ public class UserDetailsImpl implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(Long id, String firstName, String secondName, String username, String password,
-                           String identificationNumber, Collection<? extends GrantedAuthority> authorities) {
+                           String identificationNumber, String accountStatus, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -40,6 +40,7 @@ public class UserDetailsImpl implements UserDetails {
         this.password = password;
         this.authorities = authorities;
         this.identificationNumber = identificationNumber;
+        this.accountStatus = accountStatus;
     }
 
     public static UserDetailsImpl build(User user) {
@@ -49,11 +50,12 @@ public class UserDetailsImpl implements UserDetails {
 
         return new UserDetailsImpl(
                 user.getId(),
-                user.getUsername(),
                 user.getFirstName(),
                 user.getSecondName(),
+                user.getUsername(),
                 user.getPassword(),
                 user.getIdentificationNumber(),
+                user.getAccountStatus(),
                 authorities);
     }
 
