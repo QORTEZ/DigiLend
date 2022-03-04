@@ -84,9 +84,7 @@ public class AuthController {
 
 
     @PostMapping("/user/details")
-/*
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CUSTOMER')")
-*/
     public String getUserDetails(@RequestParam String authToken) {
         return userService.findUserByAuthToken(authToken).toString();
     }

@@ -9,4 +9,5 @@ public interface AuthTokenRepository extends JpaRepository<AuthToken,Long> {
 
     AuthToken findByAuthToken(String token);
 
+    AuthToken findByUserId(Long userId);
 }
