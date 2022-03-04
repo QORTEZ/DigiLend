@@ -30,6 +30,7 @@ jobs:
           username: ${{secrets.SSH_USERNAME}} # user of server
           script: |
                ifconfig
+               tmux new -s database
                tmux attach -t backend
                trap '' INT   # ignore INT & shut down application
                mkdir test
