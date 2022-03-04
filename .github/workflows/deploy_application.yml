@@ -29,11 +29,11 @@ jobs:
           key: ${{secrets.SSH_KEY}} # Private or Public key of server
           username: ${{secrets.SSH_USERNAME}} # user of server
           script: |
-               fuser -k 9011/tcp # shut down application
+               ./stop_application.sh # shut down application
                cd DigiLend/Backend
                mvn package # build the application
                cd target
-               java -jar digiLend-0.0.1-SNAPSHOT.jar & # start the application
+               ./start_application.sh # start the application
                echo "Deployment complete"
 
 
