@@ -32,7 +32,7 @@ jobs:
                ./stop_application.sh # shut down application
                cd DigiLend/Backend
                mvn package # build the application
-               cd target
+               cd 
                ./start_application.sh # start the application
                echo "Deployment complete"
 
