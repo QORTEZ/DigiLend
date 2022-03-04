@@ -36,7 +36,6 @@ public class UserService {
             userDetails.put("secondName", user.getSecondName());
             userDetails.put("accountStatus", user.getAccountStatus());
         }
-        System.out.println(userDetails);
         return userDetails;
     }
 
@@ -46,9 +45,15 @@ public class UserService {
      * @param id
      */
     public void saveAuthToken(String jwt, Long id) {
-        AuthToken authToken = new AuthToken();
+        AuthToken authToken ;
+        AuthToken byUserId = authTokenRepository.findByUserId(id);
+        if(byUserId != null){
+            authToken = byUserId;
+        } else {
+            authToken = new AuthToken();
+            authToken.setUserId(id);
+        }
         authToken.setAuthToken(jwt);
-        authToken.setUserId(id);
         authTokenRepository.save(authToken);
     }
 }
