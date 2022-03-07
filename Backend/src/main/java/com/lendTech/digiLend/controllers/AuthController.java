@@ -74,12 +74,15 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        userService.saveAuthToken(jwt,userDetails.getId());
+        userService.saveAuthToken(jwt, userDetails.getId());
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 refreshToken.getToken(),
-                roles));
+                roles,
+                userDetails.getId(),
+                userDetails.getFirstName(),
+                userDetails.getSecondName()));
     }
 
 
